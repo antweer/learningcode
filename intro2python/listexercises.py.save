@@ -1,0 +1,82 @@
+#1 Sum the Numbers
+a=[3,5,6,2,5,7,8,2,12,45]
+print(a)
+
+asum = sum(a)
+print(asum)
+
+#2 Largest Number
+
+a.sort(reverse = True)
+alargest = a[0]
+print(alargest)
+
+#3 Smallest Number
+
+a.sort()
+asmallest = a[0]
+print(asmallest)
+
+#4 Even Numbers
+b=[-36,-23,-20,-15,-10,-6,-3,0,2,3,4,5,7,8,10,11,14,15,18,19,22,29,32,35]
+print(b)
+
+for num1 in range(0,len(b)):
+	if b[num1]%2 == 0:
+		print(b[num1])
+	else:
+		continue
+
+#5 Positive Numbers
+
+for num2 in range(0, len(b)):
+	if b[num2]>0:
+		print(b[num2])
+	else:
+		continue
+
+#6 Positive Numbers II
+
+c=[]
+
+for num3 in range(0, len(b)):
+	if b[num3]>0:
+		c.append(b[num3])
+	else:
+		continue
+print(c)
+
+#7 Multiply a list
+
+f=2
+d=[]
+
+for num4 in c:
+	d.append(num4*f)
+print(d)
+
+#8 Multiply Vectors
+
+
+e=[2,3,4]
+f=[6,7,8]
+g=[]
+print(e)
+print(f)
+
+if len(e) == len(f):
+	for num5 in e:
+		g.append(num5*f[e.index(num5)])
+print(g)
+
+#9 Matrix Addition
+
+h= [[2,5],[4,6]]
+i= [[3,4],[7,8]]
+j=[]
+
+for num6 in range(0,len(h))
+	for num7 in range(0,len(h[num6]))
+		j[num6][num7]=h[num6][num7]+i[num6][num7]
+
+
