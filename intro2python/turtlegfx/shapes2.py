@@ -2,14 +2,33 @@
 
 from turtle import *
 
-def triangle(size, fill, c):
+def dt(size, fill, c):
 	color(c)
 	if fill == True:
 		begin_fill()
+	down()
 	for i in range(3):
 		forward(size)
 		right(120)
 	end_fill()
+	up()
+	right(60)
+	forward(size)
+	left(60)
+	
+def ut(s,f,c):
+	color(c)
+	if f == True:
+		begin_fill()
+	down()
+	for i in range(3):
+		forward(s)
+		left(120)
+	end_fill()
+	up()
+	left(60)
+	forward(s)
+	right(60)
 
 def square(s, f, c):
 	color(c)
