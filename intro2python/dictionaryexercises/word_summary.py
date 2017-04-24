@@ -8,7 +8,8 @@ def word_histogram(text):
     for x in words:
         tally[x] = text.count(x)
     print(tally)
-
+    return tally
+    
 if __name__ == "__main__":
     paragraph = input("Statement: ").lower()
     word_histogram(paragraph)
