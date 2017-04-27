@@ -52,23 +52,28 @@ class Hero(Character):
         self.xcoord = xcoord
         self.ycoord = ycoord
         self.image = pygame.image.load("images/hero.png")
-    def move(self, screen):
-        if self.ycoord > 15 and pygame.key.get_pressed()[pygame.K_UP]:
-            self.movenorth(screen)
-        elif self.ycoord < 450 and pygame.key.get_pressed()[pygame.K_DOWN]:
-            self.movesouth(screen)
-        elif self.xcoord > 15 and pygame.key.get_pressed()[pygame.K_LEFT]:
-            self.movewest(screen)
-        elif self.xcoord < 490 and pygame.key.get_pressed()[pygame.K_RIGHT]:
-            self.moveeast(screen)  
+        self.limiter = 30
+    def move(self, screen, framecount):
+        if framecount%self.limiter == 0:
+            if self.ycoord > 15 and pygame.key.get_pressed()[pygame.K_UP]:
+                self.movenorth(screen)
+            elif self.ycoord < 450 and pygame.key.get_pressed()[pygame.K_DOWN]:
+                self.movesouth(screen)
+            elif self.xcoord > 15 and pygame.key.get_pressed()[pygame.K_LEFT]:
+                self.movewest(screen)
+            elif self.xcoord < 490 and pygame.key.get_pressed()[pygame.K_RIGHT]:
+                self.moveeast(screen)  
+            else:
+                self.stay(screen) 
         else:
-            self.stay(screen) 
+            self.stay(screen)
 
 class Enemy(Character):
      def __init__(self, xcoord = randint(20,480) , ycoord = randint(20,460)):
         self.xcoord = xcoord
         self.ycoord = ycoord
-     def movemonster(self, screen, framecount, limiter):
+        self.limiter = 60
+     def movemonster(self, screen, framecount):
         moves = [self.movenorth, 
                 self.movesouth, 
                 self.moveeast, 
@@ -79,7 +84,7 @@ class Enemy(Character):
                 self.movesoutheast
                 ]
         randomdir = randint(0,7)
-        if framecount%limiter == 0:
+        if framecount%self.limiter == 0:
             return moves[randomdir](screen)
         else:
             return self.stay(screen)    
@@ -89,12 +94,14 @@ class Monster(Enemy):
         self.xcoord = xcoord
         self.ycoord = ycoord
         self.image = pygame.image.load("images/monster.png")
+        self.limiter = 30
 
 class Goblin(Enemy):
     def __init__(self, xcoord = randint(20,480) , ycoord = randint(20,460)):
         self.xcoord = xcoord
         self.ycoord = ycoord
         self.image = pygame.image.load("images/goblin.png")
+        self.limiter = 90
     
 def main():
     width = 510
@@ -109,6 +116,7 @@ def main():
     screen.blit(background, (0, 0))
     winsound = pygame.mixer.Sound("sounds/win.wav")
     losesound = pygame.mixer.Sound("sounds/lose.wav")
+    song = pygame.mixer.Sound("sounds/music.wav")
     font = pygame.font.Font(None, 40)
     wintext = font.render('Hit ENTER to play again!', True, black_color)
     losetext = font.render('You lose! Hit ENTER to play again', True, black_color)
@@ -117,10 +125,11 @@ def main():
 
     monster = Monster()
     hero = Hero()
-    goblin = Goblin()
+    goblin1 = Goblin()
     goblin2 = Goblin()
     goblin3 = Goblin()
-    enemies = {1:monster, 2:goblin, 3:goblin2, 4:goblin3}
+    enemies = {1:monster, 2:goblin1, 3:goblin2, 4:goblin3}
+    goblins = {1:goblin1, 2:goblin2, 3:goblin3}
     framecount = 0
     stop_game = False
     playing = True
@@ -131,37 +140,31 @@ def main():
                 stop_game = True
 
         while playing:
+            song.play()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     stop_game = True
             screen.blit(background, (0, 0))
-            if framecount%30 == 0:
-                hero.move(screen)
-            else:
-                hero.stay(screen)    
-            if sqrt((hero.ycoord-monster.ycoord)**2 + (hero.xcoord-monster.xcoord)**2) <= 32:
-                winorloss = "win"
-                playing = False
-            elif sqrt((hero.ycoord-goblin.ycoord)**2 + (hero.xcoord-goblin.xcoord)**2) <= 32:
-                winorloss = "loss"
-                playing = False
-            else:
-                for x in enemies:
-                    enemies[x].movemonster(screen, framecount, 60)
+            hero.move(screen,framecount)
+            for x in enemies:
+                if sqrt((hero.ycoord-enemies[x].ycoord)**2 + (hero.xcoord-enemies[x].xcoord)**2) <= 32:
+                    winorloss = enemies[x]
+                    playing = False
+                else:
+                    enemies[x].movemonster(screen, framecount)  
             pygame.display.update()
             clock.tick(60)
-            framecount += 1
+            framecount += 1  
         
         screen.blit(background, (0, 0))
         hero.stay(screen)   
 
-        if winorloss == "win":
+        if winorloss == monster:
             winsound.play()
             screen.blit(wintext, (75, 230))
-        
-        if winorloss == "loss":
+        else:
             losesound.play()
-            screen.blit(losetext, (40, 230))
+            screen.blit(losetext, (30, 230))
         
         pygame.display.update()
 
@@ -175,3 +178,11 @@ def main():
 
 if __name__ == '__main__':
     main()
+"""                
+            if sqrt((hero.ycoord-monster.ycoord)**2 + (hero.xcoord-monster.xcoord)**2) <= 32:
+                winorloss = "win"
+                playing = False
+            elif sqrt((hero.ycoord-goblin.ycoord)**2 + (hero.xcoord-goblin.xcoord)**2) <= 32:
+                winorloss = "loss"
+                playing = False
+"""
