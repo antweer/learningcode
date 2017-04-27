@@ -52,7 +52,7 @@ class Hero(Character):
         self.xcoord = xcoord
         self.ycoord = ycoord
         self.image = pygame.image.load("images/hero.png")
-        self.limiter = 30
+        self.limiter = 10
     def move(self, screen, framecount):
         if framecount%self.limiter == 0:
             if self.ycoord > 15 and pygame.key.get_pressed()[pygame.K_UP]:
@@ -94,14 +94,14 @@ class Monster(Enemy):
         self.xcoord = xcoord
         self.ycoord = ycoord
         self.image = pygame.image.load("images/monster.png")
-        self.limiter = 30
+        self.limiter = 5
 
 class Goblin(Enemy):
     def __init__(self, xcoord = randint(20,480) , ycoord = randint(20,460)):
         self.xcoord = xcoord
         self.ycoord = ycoord
         self.image = pygame.image.load("images/goblin.png")
-        self.limiter = 90
+        self.limiter = 20
     
 def main():
     width = 510
@@ -149,13 +149,14 @@ def main():
             for x in enemies:
                 if sqrt((hero.ycoord-enemies[x].ycoord)**2 + (hero.xcoord-enemies[x].xcoord)**2) <= 32:
                     winorloss = enemies[x]
+                    song.stop()
                     playing = False
                 else:
                     enemies[x].movemonster(screen, framecount)  
             pygame.display.update()
             clock.tick(60)
             framecount += 1  
-        
+
         screen.blit(background, (0, 0))
         hero.stay(screen)   
 
