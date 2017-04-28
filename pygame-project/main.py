@@ -94,7 +94,7 @@ class Monster(Enemy):
         self.xcoord = xcoord
         self.ycoord = ycoord
         self.image = pygame.image.load("images/monster.png")
-        self.limiter = 5
+        self.limiter = 15
 
 class Goblin(Enemy):
     def __init__(self, xcoord = randint(20,480) , ycoord = randint(20,460)):
@@ -102,6 +102,7 @@ class Goblin(Enemy):
         self.ycoord = ycoord
         self.image = pygame.image.load("images/goblin.png")
         self.limiter = 20
+
     
 def main():
     width = 510
@@ -122,7 +123,7 @@ def main():
     losetext = font.render('You lose! Hit ENTER to play again', True, black_color)
     
     # Game initialization
-
+    level = 0
     monster = Monster()
     hero = Hero()
     goblin1 = Goblin()
@@ -135,16 +136,25 @@ def main():
     playing = True
     winorloss = ""
     while not stop_game:
+        leveltext = font.render("Level {}".format(level), True, black_color)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 stop_game = True
-
+        if level > 0:      
+            for x in range(0, level):
+                goblins[x+3] = Goblin()
+                enemies[x+4] = Goblin()
+        else:
+            for x in range(3, len(goblins)):
+                del goblins[x] 
+                del enemies[x+1]
         while playing:
             song.play()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    stop_game = True
+                    break
             screen.blit(background, (0, 0))
+            screen.blit(leveltext, (20,20))
             hero.move(screen,framecount)
             for x in enemies:
                 if sqrt((hero.ycoord-enemies[x].ycoord)**2 + (hero.xcoord-enemies[x].xcoord)**2) <= 32:
@@ -166,8 +176,12 @@ def main():
         else:
             losesound.play()
             screen.blit(losetext, (30, 230))
+            level = 0
         
         pygame.display.update()
+
+        if winorloss == monster and pygame.key.get_pressed()[pygame.K_RETURN]:
+            level += 1
 
         if pygame.key.get_pressed()[pygame.K_RETURN]:
             playing = True
@@ -179,11 +193,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-"""                
-            if sqrt((hero.ycoord-monster.ycoord)**2 + (hero.xcoord-monster.xcoord)**2) <= 32:
-                winorloss = "win"
-                playing = False
-            elif sqrt((hero.ycoord-goblin.ycoord)**2 + (hero.xcoord-goblin.xcoord)**2) <= 32:
-                winorloss = "loss"
-                playing = False
-"""
