@@ -4,10 +4,20 @@ import pygame
 from random import randint
 from math import sqrt, fabs
 from characters import *
-    
+
+def levelchange(level, goblins, enemies):
+    if level > 0:      
+        for x in range(0, level+1):
+            goblins[x+3] = Goblin()
+            enemies[x+4] = Goblin()
+    else:
+        for x in range(3, len(goblins)):
+            del goblins[x] 
+            del enemies[x+1]
+
 def main():
     #Game initialization
-    width = 510
+    width = 512
     height = 480
     black_color = (0, 0, 0)
 
@@ -37,14 +47,7 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 stop_game = True
-        if level > 0:      
-            for x in range(0, level+1):
-                goblins[x+3] = Goblin()
-                enemies[x+4] = Goblin()
-        else:
-            for x in range(3, len(goblins)):
-                del goblins[x] 
-                del enemies[x+1]
+        levelchange(level, goblins, enemies)
         while playing:
             song.play()
             for event in pygame.event.get():
@@ -60,6 +63,7 @@ def main():
                     playing = False
                 else:
                     enemies[x].movemonster(screen, framecount)  
+            
             pygame.display.update()
             clock.tick(60)
             framecount += 1  
@@ -74,6 +78,7 @@ def main():
             losesound.play()
             screen.blit(losetext, (30, 230))
             level = 0
+
         
         pygame.display.update()
 
