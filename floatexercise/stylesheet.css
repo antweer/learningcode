@@ -1,3 +1,9 @@
+html{
+    height: 100vh;
+}
+body{
+    height: 100vh;
+}
 .clearfix{
     clear: both;
 }
@@ -22,7 +28,7 @@ footer{
     height: 100%;
 }
 .columns{
-    height: 800px;
+    height: 100%;
 }
 .columns > div{
     float: left;
