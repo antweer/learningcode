@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '104.236.213.240',
     'localhost',
+    'learningdjango.trajwani.com',
 ]
 
 
