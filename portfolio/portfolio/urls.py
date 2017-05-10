@@ -21,5 +21,7 @@ import homepage.views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', homepage.views.homepage, name='homepage'),
-    url(r'^contact$', homepage.views.contact, name='contact')
+    url(r'^hello$', homepage.views.hello, name='hello'),
+    url(r'^thanks/$', homepage.views.thanks, name='thanks/'),
+    url(r'^contact_me$', homepage.views.contact_me, name='contact_me')
 ]
