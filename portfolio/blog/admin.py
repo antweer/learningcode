@@ -1,6 +1,10 @@
 from django.contrib import admin
-from blog.models import Blog, Post
+from blog.models import Blog, Post, Tag
 
+@admin.register(Tag)
+class BlogAdmin(admin.ModelAdmin):
+  list_display = ('name', 'slug')
+  
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
   list_display = ('name', 'slug')

@@ -1,4 +1,4 @@
-from fabric.api import run, env, sudo, cd, prefix
+from fabric.api import run, put, env, sudo, cd, prefix
 
 env.hosts = ['104.236.213.240']
 env.user = 'tanweer'
@@ -20,7 +20,9 @@ def deploy ():
     
     with prefix(VENV):
       run('pip install -r requirements.txt  > install.log')
-      
+      run('python manage.py migrate')
+    
+    put('db.sqlite3', '/home/tanweer/learningdjango/portfolio')  
     run('pm2 restart all > restart.log')
     
 def hello ():
