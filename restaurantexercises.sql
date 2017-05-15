@@ -1,0 +1,15 @@
+SELECT * FROM restaurant WHERE stars = 5;
+SELECT name, favorite_dish FROM restaurant WHERE stars = 5;
+SELECT name, id FROM restaurant WHERE name = 'Pizza Hut';
+SELECT * FROM restaurant WHERE category = 'Pizza';
+SELECT * FROM restaurant WHERE distance <= 2;
+SELECT * FROM restaurant WHERE last_visit <= '05/08/2017';
+SELECT * FROM restaurant WHERE stars = 5 AND last_visit <= '05/08/2017';
+SELECT * FROM restaurant ORDER BY distance;
+SELECT * FROM restaurant ORDER BY distance LIMIT 2;
+SELECT * FROM restaurant ORDER BY stars DESC LIMIT 2;
+SELECT * FROM restaurant ORDER BY stars DESC, distance <= 2 LIMIT 2;
+SELECT COUNT(*) FROM restaurant;
+SELECT category, COUNT(*) FROM restaurant GROUP BY category;
+SELECT category, AVG(stars) FROM restaurant GROUP BY category;
+SELECT category, MAX(stars) FROM restaurant GROUP BY category;
