@@ -2,6 +2,7 @@ SELECT * FROM restaurant WHERE stars = 5;
 SELECT name, favorite_dish FROM restaurant WHERE stars = 5;
 SELECT name, id FROM restaurant WHERE name = 'Pizza Hut';
 SELECT * FROM restaurant WHERE category = 'Pizza';
+SELECT * FROM restaurant WHERE category = 'Pizza' AND does_takeout = TRUE;
 SELECT * FROM restaurant WHERE distance <= 2;
 SELECT * FROM restaurant WHERE last_visit <= '05/08/2017';
 SELECT * FROM restaurant WHERE stars = 5 AND last_visit <= '05/08/2017';

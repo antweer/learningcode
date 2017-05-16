@@ -1,0 +1,32 @@
+-- Querying project.sql - Projects DB Exercises
+-- Problem 1
+SELECT * FROM project_uses_tech LEFT OUTER JOIN project ON project_uses_tech.project_id = project.id WHERE tech_id = 3;
+-- Problem 2
+SELECT * FROM project_uses_tech JOIN project ON project_uses_tech.project_id = project.id JOIN tech ON project_uses_tech.tech_id = tech.id WHERE project_id = 4;
+-- Problem 3
+SELECT * FROM project_uses_tech RIGHT OUTER JOIN tech ON project_uses_tech.tech_id = tech.id;
+-- Ruby, JavaScript, and Java have no projects associated with them
+-- Problem 4
+SELECT project_uses_tech.project_id, COUNT(project_uses_tech.tech_id) FROM project_uses_tech RIGHT OUTER JOIN tech ON project_uses_tech.tech_id = tech.id GROUP BY project_uses_tech.project_id ORDER by project_uses_tech.project_id ASC;
+-- Problem 5
+SELECT * FROM project_uses_tech RIGHT OUTER JOIN project ON project_uses_tech.project_id = project.id;
+-- Whiteboard Exercises don't have an associated tech
+-- Problem 6
+SELECT project_uses_tech.tech_id, COUNT(project_uses_tech.project_id) FROM project_uses_tech LEFT OUTER JOIN project ON project_uses_tech.project_id = project.id GROUP BY project_uses_tech.tech_id ORDER BY project_uses_tech.tech_id ASC;
+-- Problem 7
+SELECT * FROM project_uses_tech JOIN project ON project_uses_tech.project_id = project.id JOIN tech ON project_uses_tech.tech_id = tech.id;
+-- Problem 8
+SELECT DISTINCT(project_uses_tech.tech_id) FROM project_uses_tech JOIN tech ON project_uses_tech.tech_id = tech.id ORDER BY project_uses_tech.tech_id ASC;
+-- Problem 9
+SELECT * FROM tech LEFT OUTER JOIN project_uses_tech ON project_uses_tech.tech_id = tech.id WHERE project_uses_tech.tech_id IS NULL;
+-- Problem 10
+SELECT DISTINCT(project_uses_tech.project_id) FROM project_uses_tech JOIN project ON project_uses_tech.project_id = project.id ORDER BY project_uses_tech.project_id ASC;
+-- Problem 11
+SELECT * FROM project LEFT OUTER JOIN project_uses_tech ON project_uses_tech.project_id = project.id WHERE project_uses_tech.project_id IS NULL;
+-- Problem 12
+SELECT project.id, project.name, COUNT(project_uses_tech.project_id) FROM project LEFT OUTER JOIN project_uses_tech ON project_uses_tech.project_id = project.id GROUP BY project.id ORDER BY count ASC;
+-- Problem 13
+SELECT tech.id, tech.name, COUNT(project_uses_tech.tech_id) FROM tech LEFT OUTER JOIN project_uses_tech ON project_uses_tech.tech_id = tech.id GROUP BY tech.id ORDER BY count ASC;
+-- Problem 14
+SELECT AVG(count) FROM (SELECT project.id, project.name, COUNT(project_uses_tech.project_id) FROM project LEFT OUTER JOIN project_uses_tech ON project_uses_tech.project_id = project.id GROUP BY project.id) AS project_count;
+-- Average = 2.09
