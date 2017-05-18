@@ -252,3 +252,18 @@ function matrixAdd(array1, array2){
 // Matrix Multiplication
 
 // Rock Paper Scissors
+function rockPaperScissors(player1, player2){
+  var win = {
+    "rock":"scissors",
+    "paper":"rock",
+    "scissors":"paper"
+  };
+  if(win[player1]==player2){
+    return("player 1");
+  } else if (win[player2]==player1){
+    return("player 2");
+  } else {
+    return("draw");
+  }
+}
+// Tic Tac Toe
