@@ -47,3 +47,22 @@ function wordHistogram(string){
 }
 
 // Bonus 
+function twoFrequentLetters(string){
+  var letters = string.split("");
+  var histogram = {};
+  var sorting = [];
+  for(let i = 0; i<letters.length; i++){
+    if(histogram[letters[i]]){
+      histogram[letters[i]] += 1;
+    } else {
+      histogram[letters[i]] = 1;
+    }
+  }
+  var keysSorted = Object.keys(histogram).sort(function(a, b) {
+    if (histogram[b] > histogram[a]) {return 1; }
+    else if (histogram[b] < histogram[a]) {return -1; }
+    return 0;
+  });
+  return keysSorted.slice(0,2);
+}
+twoFrequentLetters("bananas");
