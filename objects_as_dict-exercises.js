@@ -18,3 +18,32 @@ for(var personName in phonebookDict){
   console.log(`${personName}: ${phoneNumber}`);
 }
 
+// Letter Histogram
+function letterHistogram(string){
+  var letters = string.split("");
+  var histogram = {};
+  for(let i = 0; i<letters.length; i++){
+    if(histogram[letters[i]]){
+      histogram[letters[i]] += 1;
+    } else {
+      histogram[letters[i]] = 1;
+    }
+  }
+  return histogram;
+}
+
+// Word Histogram 
+function wordHistogram(string){
+  var words = string.split(" ");
+  var histogram = {};
+  for(let i = 0; i<words.length; i++){
+    if(histogram[words[i]]){
+      histogram[words[i]] += 1;
+    } else {
+      histogram[words[i]] = 1;
+    }
+  }
+  return histogram;
+}
+
+// Bonus 
