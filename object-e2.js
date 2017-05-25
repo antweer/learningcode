@@ -17,4 +17,34 @@ mom.showInfo = function(){
 mom.showInfo();
 daughter.showInfo();
 
-// Person
+// Person + these thises +
+class Person {
+  constructor(name){
+    this.name = name;
+    this.friends = [];
+  }
+  addFriend(friend){
+    this.friends.push(friend);
+  }
+  createGreeting(other){
+    return('Yo ' + other.name + '! from ' + this.name + '.');
+  }
+  greet(other){
+    console.log(this.createGreeting(other));
+  }
+  lazyGreet(other){
+    setTimeout(() => {this.greet(other);}, 10000);
+  }
+  createGreetingsForFriends() {
+    var self = this;
+    var greetings = this.friends.map(function(person){return self.createGreeting(person);});
+    return greetings;
+  }
+}
+
+var alfie = new Person('Alfie');
+var anushka = new Person('Anushka');
+var henrique = new Person('Henrique');
+alfie.addFriend(anushka);
+alfie.addFriend(henrique);
+alfie.createGreetingsForFriends();
