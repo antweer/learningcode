@@ -7,7 +7,9 @@ app.use(body_parser.urlencoded({extended: false}));
 app.use('/static', express.static('public'));
 app.set('view engine', 'hbs');
 
-
+app.get('/', function(req, resp){
+  resp.render('homepage.hbs', {title: 'Review restaurants!'});
+});
 
 app.listen(8000, function(){
   console.log('Listening on Port 8000');
