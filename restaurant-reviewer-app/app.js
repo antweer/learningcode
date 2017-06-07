@@ -5,6 +5,7 @@ var body_parser = require('body-parser');
 
 app.use(body_parser.urlencoded({extended: false}));
 app.use('/static', express.static('public'));
+app.set('view engine', 'hbs');
 
 
 
