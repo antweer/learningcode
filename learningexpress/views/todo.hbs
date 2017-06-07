@@ -1,0 +1,17 @@
+<h1>Unfinished Tasks:</h1>
+<ul>
+  {{#each results}}
+    {{#if done}}
+    {{else}}
+      <li>(Task #{{id}}) {{description}}</li>
+    {{/if}}
+  {{/each}}
+</ul>
+<h1>Completed Tasks:</h1>
+<ul>
+  {{#each results}}
+    {{#if done}}
+      <li>(Task #{{id}}) {{description}}</li>
+    {{/if}}
+  {{/each}}
+</ul>
