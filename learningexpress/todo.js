@@ -51,7 +51,7 @@ app.get('/done/:id', function(request, response){
   var id = request.params.id;
   db.query('UPDATE task SET done = TRUE WHERE id = $1', id)
     .then(function(){
-      response.redirect('/todos');
+      response.redirect('/');
     });
 });
 
@@ -59,7 +59,7 @@ app.post('/submit', function(request, response){
   console.log(request.body.name);
   db.query('INSERT INTO task (description) VALUES ($1)', request.body.name)
     .then(function(){
-      response.redirect('/todos');
+      response.redirect('/');
     });
 });
 
@@ -72,7 +72,7 @@ app.post('/login', function (request, response) {
   var password = request.body.password;
   if (username == 'tanweer' && password == 'tanweer') {
     request.session.user = username;
-    response.redirect('/todos');
+    response.redirect('/');
   } else {
     response.render('login.hbs');
   }
