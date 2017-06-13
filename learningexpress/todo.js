@@ -6,7 +6,7 @@ var promise = require('bluebird');
 var pgp = require('pg-promise')({
   promiseLib: promise
 });
-var db = pgp({database: 'test'});
+var db = pgp({database: 'postgres'});
 
 var morgan = require('morgan');
 app.use(morgan('dev'));
