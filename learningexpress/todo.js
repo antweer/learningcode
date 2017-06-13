@@ -32,7 +32,7 @@ app.use(function(request, response, next){
   }
 });
 
-app.get('/todos', function(request, response, next){
+app.get('/', function(request, response, next){
   let query = "SELECT * FROM task";
   db.any(query)
     .then(function(resultsArray){
@@ -43,11 +43,11 @@ app.get('/todos', function(request, response, next){
     .catch(next);
 });
 
-app.get('/todos/add', function(request, response){
+app.get('/add', function(request, response){
   response.render('add.hbs');
 });
 
-app.get('/todos/done/:id', function(request, response){
+app.get('/done/:id', function(request, response){
   var id = request.params.id;
   db.query('UPDATE task SET done = TRUE WHERE id = $1', id)
     .then(function(){
