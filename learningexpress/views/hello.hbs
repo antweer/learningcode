@@ -1,0 +1,13 @@
+<h1>{{title}} {{name}}</h1>
+<p>
+  <strong>{{content}}</strong>
+</p>
+<ul>
+  {{#each friend}}
+  <li>{{name}}
+      {{# if age}}
+      is {{age}}
+      {{/if}}
+  </li>
+  {{/each}}
+</ul>
