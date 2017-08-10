@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Draw App</title>
+    <style>
+      body{
+        margin:0;
+        padding:0;
+      }
+      h1{
+        margin:0;
+        padding:0;
+      }
+      canvas{
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Canvas</h1>
+    <canvas></canvas>
+    <script>
+      var canvas=document.querySelector('canvas');
+      var ctx = canvas.getContext('2d');
+      
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      
+      window.addEventListener('resize', function(){
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+      
+      function drawRectangle(x, y, height, width, color = 'red'){
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, width, height);
+      }
+      
+      /* rectangles next to each other
+      drawRectangle(25, 25, 50, 100);
+      drawRectangle(130, 25, 50, 100, 'blue');
+      */
+      
+      /* rectangle inside a rectangle
+      drawRectangle(25, 25, 100, 200);
+      drawRectangle(50, 50, 50, 100, 'blue');
+      */
+      
+      function drawCircle(x, y, radius, color = 'blue'){
+        ctx.beginPath();
+        ctx.fillStyle = color;
+        ctx.arc(x, y, radius, 0, Math.PI*2, false);
+        ctx.fill();
+      }
+      
+      /* circles!
+      drawCircle(canvas.width/2, canvas.height/2, 100);
+      drawCircle(canvas.width/2, canvas.height/2, 50, 'red');
+      */
+      
+      /* bullseye!
+      drawCircle(canvas.width/2, canvas.height/2, 400);
+      drawCircle(canvas.width/2, canvas.height/2, 300, 'white');
+      drawCircle(canvas.width/2, canvas.height/2, 285, 'yellow');
+      drawCircle(canvas.width/2, canvas.height/2, 185, 'white');
+      drawCircle(canvas.width/2, canvas.height/2, 170, 'red');
+      */
+      
+      
+      /* triangle
+      ctx.strokeStyle = 'red';
+      ctx.lineJoin = 'round';
+      ctx.lineWidth = 5;
+      
+      ctx.beginPath();
+      ctx.moveTo(100,100);
+      ctx.lineTo(200,200);
+      ctx.lineTo(100, 200);
+      ctx.closePath();
+      ctx.stroke();
+      */
+      
+      /* sketcher
+      var mouse_down = false;
+      var current;
+      var past;
+
+      function draw (past, current){
+        ctx.moveTo(past[0], past[1]);
+        ctx.quadraticCurveTo(
+          past[0], past[1],
+          current[0], current[1]
+        );
+        ctx.stroke();
+        ctx.closePath();
+      }
+      
+      canvas.addEventListener('mousedown', function(event){
+        mouse_down = true;
+      });
+      canvas.addEventListener('mouseup', function(event){
+        mouse_down = false;
+        past = null;
+      });
+      canvas.addEventListener('mousemove', function(event){
+        if (mouse_down){
+          current = [event.offsetX, event.offsetY];
+          if (past){
+            draw(past, current);
+          }
+          past = [ event.offsetX, event.offsetY];
+        }
+      });
+      */
+    </script>
+  </body>
+</html>

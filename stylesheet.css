@@ -1,0 +1,40 @@
+/*
+html { 
+    background: url("hardwood.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+*/
+body{
+    background-image: url("hardwood.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #A4FFC2;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 1vw;
+}
+nav{
+    font-family: 'Bungee Inline', cursive;
+    text-align: center;
+    font-size: 2vw;
+}
+h1{
+    font-family: 'Bungee Inline', cursive;
+    font-size: 3vw;
+    text-align: center;
+}
+h2{
+    opacity: .8;
+    font-family: 'Bungee Inline', cursive;
+    font-size: 2vw;
+    text-align: center;
+}
+h6{
+    text-align: right;
+    font-size: .5vw;
+}

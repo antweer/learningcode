@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+} 
+html, body, #page{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+#page td{
+    vertical-align: middle;
+    text-align: center;
+}
+#img{
+}
+#form{
+    width: 5000px;
+    width: 100%;
+}
