@@ -1,0 +1,24 @@
+{% extends "base.html" %}{% load static %}
+
+{% block title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+    <ul>
+    <li> <a href="{% url 'homepage' %}">Homepage</a></li>
+    <li><a href="{% url 'contact' %}">Contact</a></li>
+    </ul>
+    <h1>
+        {% if page_title %}
+        {{ name | upper }}
+        {% else %}
+        Default title
+        {% endif %}
+    </h1>
+    <h1>Hello World</h1>
+    <ul>
+    {% for n in numbers %}
+    <li>{{ n }}</li>
+    {% endfor %}
+    </ul>
+    <img src="{% static "cat.jpeg" %}" alt="cat">
+{% endblock %}
